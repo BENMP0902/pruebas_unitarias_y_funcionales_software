@@ -33,7 +33,57 @@ describe("GET /tareas", () => {
     expect(response.body[0]).toHaveProperty("completada");
 
     // 6. La primera tarea debe tener una propiedad 'descripcion'
-    // Esta propiedad no existe, y por lo tanto la prueba fallará
     expect(response.body[0]).toHaveProperty("descripcion");
+  });
+}); // <--- ¡AQUÍ FALTABA ESTO! Cerramos el bloque GET antes de abrir el POST
+
+
+// Agrupamos las pruebas relacionadas con la creacion de tareas
+describe("POST /tareas", () => {
+  
+  // PRUEBA 1: CASO DE EXITO
+  it("Debe crear una tarea cuando se envía título y descripción", async () => {
+    // Preparamos los datos que vamos a enviar (el input)
+    const nuevaTarea = {
+      titulo: "Aprender mocks",
+      descripcion: "Estudiar mocks y stubs en Jest"
+    };
+
+    // Hacemos la peticion POST simulanda enviada (.send) los datos
+    const response = await request(app).post("/tareas").send(nuevaTarea);
+
+    // Verificamos que el servidor responda "201 Created"
+    expect(response.status).toBe(201);
+
+    // Verificamos que la respuesta tenga un ID (generado por el servidor)
+    expect(response.body).toHaveProperty("id");
+
+    // Verificamos que el titulo y descripcion guardados coincidan con los enviados
+    expect(response.body.titulo).toBe(nuevaTarea.titulo);
+    expect(response.body.descripcion).toBe(nuevaTarea.descripcion);
+
+    // Verificamos que por default la tarea no este completada
+    expect(response.body.completada).toBe(false);
+  });
+
+  // PRUEBA 2: CASO DE ERROR (Validación)
+  it("Debe responder con 400 si falta algún campo obligatorio", async () => {
+    // Preparamos unos datos inválidos (falta la descripción)
+    const tareaInvalida = {
+      titulo: "Tarea sin descripción"
+    };
+
+    // Enviamos la petición con datos incompletos
+    const response = await request(app).post("/tareas").send(tareaInvalida);
+
+    // Esperamos un error 400 (Bad Request)
+    expect(response.status).toBe(400);
+    
+    // Esperamos que la API nos devuelva un mensaje explicando el error
+    expect(response.body).toHaveProperty("mensaje");
+    
+    // Verificamos que el mensaje mencione la palabra "obligatorios"
+    // (usamos una expresión regular /.../i para ignorar mayúsculas/minúsculas)
+    expect(response.body.mensaje).toMatch(/obligatorios/i);
   });
 });

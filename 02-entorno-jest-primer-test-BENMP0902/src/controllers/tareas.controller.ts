@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 
 // Por ahora, en lugar de usar una base de datos, guardamos las tareas en un arreglo
 // Tenemos un arreglo de objectos en donde cada objeto representa una tarea
-const tareas = [
+let tareas = [
   { id: 1, titulo: "Estudiar pruebas", completada: false, descripcion: "Estudiar pruebas unitarias usando Jest" },
   { id: 2, titulo: "Hacer ejercicio", completada: true, descripcion: "Correr 30 minutos a 10km/h" },
 ];
@@ -18,4 +18,33 @@ export function obtenerTareas(req: Request, res: Response) {
   // y lo enviamos como respuesta al cliente
   // Es como decir: "aquí tienes la lista de tareas que pediste"
   res.json(tareas);
+}
+
+// Nueva función para manejar la creación de tareas
+export function crearTarea(req: Request, res: Response) {
+  // Extraemos el título y la descripción del cuerpo de la petición (req.body)
+  // req.body es el JSON que nos envía el cliente (Frontend o Postman)
+  const { titulo, descripcion } = req.body;
+
+  // Validación básica: Si falta alguno de los campos obligatorios,
+  // detenemos la ejecución y respondemos con un error 400 (Bad Request).
+  if (!titulo || !descripcion) {
+    return res.status(400).json({ mensaje: "El título y la descripción son obligatorios" });
+  }
+
+  // Si todo está bien, creamos el objeto de la nueva tarea.
+  // Generamos un ID simple sumando 1 al total actual (solo para este ejemplo en memoria)
+  const nuevaTarea = {
+    id: tareas.length + 1,
+    titulo,
+    descripcion,
+    completada: false // Por defecto, una tarea nueva no está completada
+  };
+
+  // Guardamos la tarea en nuestro arreglo
+  tareas.push(nuevaTarea);
+  
+  // Respondemos con código 201 (Created) y devolvemos la tarea creada
+  // Es buena práctica devolver el objeto creado para que el cliente tenga el ID.
+  res.status(201).json(nuevaTarea);
 }
