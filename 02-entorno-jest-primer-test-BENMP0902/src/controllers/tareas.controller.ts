@@ -2,15 +2,42 @@
 // Request: contiene toda la información que nos envía el cliente (como datos del formulario, parámetros, etc.)
 // Response: nos permite enviar respuestas al cliente (como datos, mensajes de error, etc.)
 import { Request, Response } from 'express';
+// Importamos las funciones del servicio. El controlador ya no sabe que existe un arreglo 'tareas'.
+import { obtenerTodasLasTareas, crearTarea } from "../services/tareas.service";
 
+export function getTareas(req: Request, res: Response): void {
+  // El controlador solo pide los datos al servicio y los envia.
+  const tareas = obtenerTodasLasTareas();
+  res.json(tareas);
+}
+
+export function postTarea(req: Request, res: Response): void {
+  const { titulo, descripcion } = req.body;
+  
+  // Responsabilidad del controlador: Validar que la peticion HTTP sea correcta
+  if (!titulo || !descripcion) {
+    res.status(400).json({ mensaje: "Faltan campos obligatorios" });
+    return;
+  }
+
+  // Delegamos la lógica de negocio del servicio
+  const nueva = crearTarea({
+    titulo,
+    descripcion,
+    completada: false,
+  });
+
+  // Responsabilidad del controlador: Responder con el código HTTP adecuado (201)
+  res.status(201).json(nueva)
+}
 // Por ahora, en lugar de usar una base de datos, guardamos las tareas en un arreglo
 // Tenemos un arreglo de objectos en donde cada objeto representa una tarea
-let tareas = [
-  { id: 1, titulo: "Estudiar pruebas", completada: false, descripcion: "Estudiar pruebas unitarias usando Jest" },
-  { id: 2, titulo: "Hacer ejercicio", completada: true, descripcion: "Correr 30 minutos a 10km/h" },
-];
+// let tareas = [
+//  { id: 1, titulo: "Estudiar pruebas", completada: false, descripcion: "Estudiar pruebas unitarias usando Jest" },
+//  { id: 2, titulo: "Hacer ejercicio", completada: true, descripcion: "Correr 30 minutos a 10km/h" },];
 
-// Esta función se ejecuta cuando alguien hace una petición GET a nuestra API
+
+/* // Esta función se ejecuta cuando alguien hace una petición GET a nuestra API
 // Por ejemplo, cuando un navegador o una app móvil quiere ver la lista de tareas
 // en el archivo app.ts vamos a usar esta función para obtener las tareas
 export function obtenerTareas(req: Request, res: Response) {
@@ -47,4 +74,4 @@ export function crearTarea(req: Request, res: Response) {
   // Respondemos con código 201 (Created) y devolvemos la tarea creada
   // Es buena práctica devolver el objeto creado para que el cliente tenga el ID.
   res.status(201).json(nuevaTarea);
-}
+} */
