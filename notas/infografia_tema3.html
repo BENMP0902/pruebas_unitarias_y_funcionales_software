@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 3: Diseño y HTTP</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .pattern-grid { background-image: radial-gradient(#e5e7eb 1px, transparent 1px); background-size: 20px 20px; }
+    </style>
+</head>
+<body class="bg-gray-50 pattern-grid p-4 md:p-8">
+
+    <div class="max-w-5xl mx-auto space-y-12">
+
+        <!-- PARTE 1: DISEÑO ORIENTADO A PRUEBAS -->
+        <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-gray-200">
+            <div class="bg-indigo-600 text-white p-6 text-center">
+                <h2 class="text-3xl font-extrabold tracking-tight">TEMA 3: DISEÑO ORIENTADO A PRUEBAS</h2>
+                <p class="opacity-80 mt-1 text-sm font-medium uppercase tracking-wider">Haciendo código "testeable"</p>
+            </div>
+
+            <div class="p-8 grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Los 3 Pilares -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                        <span class="bg-indigo-100 text-indigo-700 p-2 rounded-lg mr-3">🏛️</span>
+                        Los 3 Pilares
+                    </h3>
+                    <ul class="space-y-3">
+                        <li class="bg-gray-50 p-4 rounded-xl border-l-4 border-indigo-500">
+                            <span class="font-bold block text-gray-900">1. Separación de Responsabilidades</span>
+                            <span class="text-sm text-gray-600">Cada función hace una sola cosa y la hace bien.</span>
+                        </li>
+                        <li class="bg-gray-50 p-4 rounded-xl border-l-4 border-indigo-500">
+                            <span class="font-bold block text-gray-900">2. Pocos Efectos Secundarios</span>
+                            <span class="text-sm text-gray-600">Evitar dependencias ocultas (BD, Red) dentro de la lógica pura.</span>
+                        </li>
+                        <li class="bg-gray-50 p-4 rounded-xl border-l-4 border-indigo-500">
+                            <span class="font-bold block text-gray-900">3. I/O Claro</span>
+                            <span class="text-sm text-gray-600">Entrada controlada ➔ Proceso ➔ Salida predecible.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- Mocks vs Stubs -->
+                <div class="space-y-4">
+                    <h3 class="text-xl font-bold text-gray-800 flex items-center">
+                        <span class="bg-purple-100 text-purple-700 p-2 rounded-lg mr-3">🎭</span>
+                        Simulando Dependencias
+                    </h3>
+                    <div class="grid grid-cols-1 gap-4">
+                        <!-- Stub -->
+                        <div class="bg-blue-50 p-4 rounded-xl border border-blue-100 relative overflow-hidden">
+                            <div class="absolute right-2 top-2 text-4xl opacity-20">🦜</div>
+                            <h4 class="font-bold text-blue-800">STUB (El Loro)</h4>
+                            <p class="text-sm text-gray-600 mt-1">Reemplazo tonto. Devuelve siempre lo mismo para que el código corra.</p>
+                            <div class="mt-2 text-xs bg-white p-2 rounded text-gray-500 font-mono">return "Hola";</div>
+                        </div>
+                        <!-- Mock -->
+                        <div class="bg-purple-50 p-4 rounded-xl border border-purple-100 relative overflow-hidden">
+                            <div class="absolute right-2 top-2 text-4xl opacity-20">🕵️‍♂️</div>
+                            <h4 class="font-bold text-purple-800">MOCK (El Espía)</h4>
+                            <p class="text-sm text-gray-600 mt-1">Objeto inteligente. Registra si fue llamado, cuántas veces y con qué datos.</p>
+                            <div class="mt-2 text-xs bg-white p-2 rounded text-gray-500 font-mono">expect(fn).toHaveBeenCalledWith(10);</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PARTE 2: CÓDIGOS HTTP -->
+        <div class="bg-slate-900 rounded-3xl shadow-2xl overflow-hidden text-white border-4 border-slate-800">
+            <div class="p-8 text-center border-b border-slate-700 bg-slate-800">
+                <h2 class="text-4xl font-extrabold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
+                    CÓDIGOS DE ESTADO HTTP
+                </h2>
+                <p class="text-slate-400 mt-2 text-lg">Guía Profesional de Supervivencia</p>
+            </div>
+
+            <div class="p-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+                <!-- 2xx SUCCESS -->
+                <div class="bg-emerald-900/30 p-6 rounded-2xl border border-emerald-500/30">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold text-emerald-400">2xx Success</h3>
+                        <span class="text-xs bg-emerald-500 text-black px-2 py-1 rounded font-bold">TODO BIEN</span>
+                    </div>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex justify-between">
+                            <span class="font-mono font-bold text-emerald-200">200 OK</span>
+                            <span class="text-slate-400">Éxito estándar.</span>
+                        </li>
+                        <li class="flex justify-between bg-emerald-500/20 p-2 rounded">
+                            <span class="font-mono font-bold text-white">201 Created</span>
+                            <span class="text-emerald-200">Recurso creado (POST).</span>
+                        </li>
+                        <li class="flex justify-between">
+                            <span class="font-mono font-bold text-emerald-200">204 No Content</span>
+                            <span class="text-slate-400">Éxito sin body (DELETE).</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 4xx CLIENT ERROR -->
+                <div class="bg-amber-900/30 p-6 rounded-2xl border border-amber-500/30 lg:col-span-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold text-amber-400">4xx Client Error</h3>
+                        <span class="text-xs bg-amber-500 text-black px-2 py-1 rounded font-bold">TU CULPA (CLIENTE)</span>
+                    </div>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <div class="font-mono font-bold text-amber-200 mb-1">400 Bad Request</div>
+                            <p class="text-slate-400 text-xs">Tu solicitud está mal formada o faltan datos.</p>
+                        </div>
+                        <div>
+                            <div class="font-mono font-bold text-amber-200 mb-1">401 Unauthorized</div>
+                            <p class="text-slate-400 text-xs">No tienes "gafete" (Token inválido).</p>
+                        </div>
+                        <div>
+                            <div class="font-mono font-bold text-amber-200 mb-1">403 Forbidden</div>
+                            <p class="text-slate-400 text-xs">Tienes gafete, pero no tienes permiso para entrar aquí.</p>
+                        </div>
+                        <div>
+                            <div class="font-mono font-bold text-amber-200 mb-1">404 Not Found</div>
+                            <p class="text-slate-400 text-xs">Lo que buscas no existe.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5xx SERVER ERROR -->
+                <div class="bg-red-900/30 p-6 rounded-2xl border border-red-500/30">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-2xl font-bold text-red-400">5xx Server Error</h3>
+                        <span class="text-xs bg-red-500 text-black px-2 py-1 rounded font-bold">MI CULPA (SERVER)</span>
+                    </div>
+                    <ul class="space-y-3 text-sm">
+                        <li class="flex flex-col">
+                            <span class="font-mono font-bold text-red-200">500 Internal Error</span>
+                            <span class="text-slate-400 text-xs mt-1">Algo explotó en el backend. El cliente no puede hacer nada.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- 3xx REDIRECTS -->
+                <div class="bg-blue-900/30 p-6 rounded-2xl border border-blue-500/30 lg:col-span-2">
+                    <div class="flex justify-between items-center mb-4">
+                        <h3 class="text-xl font-bold text-blue-400">3xx Redirección</h3>
+                        <span class="text-xs bg-blue-500 text-black px-2 py-1 rounded font-bold">MIRA ALLÁ</span>
+                    </div>
+                    <div class="text-sm text-slate-300">
+                        <span class="font-bold text-white">304 Not Modified:</span> Muy usado en caché. "No te lo envío de nuevo porque ya lo tienes".
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- TESTING CHEATSHEET -->
+            <div class="bg-black p-6 border-t border-slate-800">
+                <h4 class="text-center text-gray-400 text-sm uppercase tracking-widest mb-4">Testing Cheatsheet</h4>
+                <div class="flex flex-wrap justify-center gap-4 text-sm font-mono">
+                    <div class="px-4 py-2 bg-slate-800 rounded-full flex items-center">
+                        <span class="text-gray-400 mr-2">Entrada Inválida</span> ➜ <span class="text-amber-400 font-bold ml-2">400</span>
+                    </div>
+                    <div class="px-4 py-2 bg-slate-800 rounded-full flex items-center">
+                        <span class="text-gray-400 mr-2">Token Falso</span> ➜ <span class="text-amber-400 font-bold ml-2">401</span>
+                    </div>
+                    <div class="px-4 py-2 bg-slate-800 rounded-full flex items-center">
+                        <span class="text-gray-400 mr-2">ID Inexistente</span> ➜ <span class="text-amber-400 font-bold ml-2">404</span>
+                    </div>
+                    <div class="px-4 py-2 bg-slate-800 rounded-full flex items-center">
+                        <span class="text-gray-400 mr-2">Creación Exitosa</span> ➜ <span class="text-emerald-400 font-bold ml-2">201</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="text-center text-gray-400 text-xs pb-8">
+            Generado para Ingeniería de Software • Tema 3 y Protocolos HTTP
+        </div>
+    </div>
+</body>
+</html>

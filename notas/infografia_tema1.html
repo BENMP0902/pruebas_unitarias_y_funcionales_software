@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tema 1: Introducción al Testing</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Poppians', sans-serif; }
+        .bg-grid { background-image: linear-gradient(#e5e7eb 1px, transparent 1px), linear-gradient(to right, #e5e7eb 1px, transparent 1px); background-size: 20px 20px; }
+        .triangle-clip { clip-path: polygon(50% 0%, 0% 100%, 100% 100%); }
+    </style>
+</head>
+<body class="bg-slate-50 bg-grid p-4 md:p-8">
+
+    <div class="max-w-4xl mx-auto space-y-12">
+
+        <!-- HEADER -->
+        <header class="text-center py-10">
+            <div class="inline-block bg-indigo-600 text-white px-4 py-1 rounded-full text-sm font-bold tracking-widest mb-4">INGENIERÍA DE SOFTWARE</div>
+            <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 leading-tight">
+                INTRODUCCIÓN A LAS<br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-indigo-600 to-purple-600">PRUEBAS DE SOFTWARE</span>
+            </h1>
+            <p class="text-xl text-slate-500 mt-4 max-w-2xl mx-auto">Más allá de "ver si funciona". La red de seguridad para la calidad del código.</p>
+        </header>
+
+        <!-- SECTION 1: DEFINICIÓN & REGRESIÓN -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            
+            <!-- TARJETA 1: La Verdadera Definición -->
+            <div class="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-indigo-500">
+                <div class="text-5xl mb-4">🎯</div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-3">La Definición</h3>
+                <p class="text-slate-600 mb-4">
+                    Muchos creen que probar es ejecutar y ver que no explote.
+                    <br><br>
+                    <span class="font-bold text-indigo-700">Realidad:</span> Es un mecanismo para verificar que el sistema se comporta <span class="bg-yellow-200 px-1 text-black">como se espera</span> bajo condiciones específicas.
+                </p>
+                <div class="bg-slate-100 p-3 rounded-lg text-sm border border-slate-200">
+                    <code>expect(suma(2,2)).toBe(4);</code>
+                    <div class="text-xs text-slate-400 mt-1">Si da 5, funciona (suma), pero no es correcto.</div>
+                </div>
+            </div>
+
+            <!-- TARJETA 2: El Enemigo (Regresión) -->
+            <div class="bg-white p-8 rounded-3xl shadow-lg border-l-8 border-red-500 relative overflow-hidden">
+                <div class="absolute -right-4 -top-4 text-9xl opacity-5">👻</div>
+                <div class="text-5xl mb-4">📉</div>
+                <h3 class="text-2xl font-bold text-slate-800 mb-3">La Regresión</h3>
+                <p class="text-slate-600 mb-4">
+                    El fenómeno donde una nueva funcionalidad <strong>rompe</strong> algo que antes funcionaba bien.
+                </p>
+                <div class="space-y-2 text-sm">
+                    <div class="flex items-center">
+                        <span class="w-24 font-bold text-slate-400">Día 1:</span>
+                        <span class="bg-green-100 text-green-700 px-2 py-1 rounded">Login funciona ✅</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-24 font-bold text-slate-400">Día 2:</span>
+                        <span class="bg-blue-100 text-blue-700 px-2 py-1 rounded">Cambias Navbar 🛠️</span>
+                    </div>
+                    <div class="flex items-center">
+                        <span class="w-24 font-bold text-slate-800">Resultado:</span>
+                        <span class="bg-red-100 text-red-700 px-2 py-1 rounded font-bold">Login roto ❌</span>
+                    </div>
+                </div>
+                <p class="mt-4 text-xs text-red-500 font-bold uppercase tracking-wide">Sin tests, vives con miedo a tocar el código.</p>
+            </div>
+
+        </div>
+
+        <!-- SECTION 2: LA PIRÁMIDE DE TESTING -->
+        <div class="bg-slate-900 rounded-3xl p-8 md:p-12 text-white shadow-2xl relative overflow-hidden">
+            <div class="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                
+                <div>
+                    <h2 class="text-3xl font-bold mb-6 text-yellow-400">La Pirámide de Testing</h2>
+                    <p class="text-slate-300 mb-6 leading-relaxed">
+                        No todos los tests son iguales. Debes balancear velocidad, costo y confianza.
+                    </p>
+                    <ul class="space-y-4 text-sm">
+                        <li class="flex items-start">
+                            <span class="text-red-400 text-xl mr-3 font-bold">1. E2E (Punta):</span>
+                            <span class="text-slate-400">Lentos y frágiles. Simulan al usuario (clics, navegación). Ten pocos.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-blue-400 text-xl mr-3 font-bold">2. Integración:</span>
+                            <span class="text-slate-400">Verifican conexiones (API + Base de Datos). Balance perfecto.</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-400 text-xl mr-3 font-bold">3. Unitarias (Base):</span>
+                            <span class="text-slate-400">Aíslan funciones. Son miles. Corren en milisegundos. Son tu cimiento.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- GRÁFICO PIRÁMIDE -->
+                <div class="flex flex-col items-center justify-center space-y-2">
+                    <!-- Nivel 3 -->
+                    <div class="w-32 bg-red-500 py-3 text-center rounded-t-xl font-bold shadow-lg transform hover:scale-105 transition">E2E</div>
+                    <!-- Nivel 2 -->
+                    <div class="w-56 bg-blue-500 py-6 text-center font-bold shadow-lg transform hover:scale-105 transition">INTEGRACIÓN</div>
+                    <!-- Nivel 1 -->
+                    <div class="w-80 bg-green-500 py-10 text-center rounded-b-xl font-bold shadow-lg text-black transform hover:scale-105 transition">UNITARIAS</div>
+                    
+                    <div class="flex justify-between w-80 text-xs text-gray-500 mt-2 font-mono uppercase">
+                        <span>Rapidez ⬆️</span>
+                        <span>Costo ⬇️</span>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- SECTION 3: MANUAL VS AUTOMATIZADO -->
+        <div class="bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
+            <div class="grid grid-cols-1 md:grid-cols-2">
+                
+                <!-- Manual -->
+                <div class="p-8 bg-slate-50 border-b md:border-b-0 md:border-r border-slate-200">
+                    <h3 class="text-xl font-bold text-slate-700 mb-4 flex items-center">
+                        🛑 Testing Manual
+                    </h3>
+                    <ul class="space-y-3 text-sm text-slate-600">
+                        <li class="flex items-center">⏳ <strong>Lento:</strong> Requiere tiempo humano.</li>
+                        <li class="flex items-center">😴 <strong>Aburrido:</strong> Propenso a errores por fatiga.</li>
+                        <li class="flex items-center">💸 <strong>Caro:</strong> No escala. Más features = más testers.</li>
+                        <li class="flex items-center">❌ <strong>No CI/CD:</strong> Frena los despliegues.</li>
+                    </ul>
+                </div>
+
+                <!-- Automático -->
+                <div class="p-8 bg-green-50">
+                    <h3 class="text-xl font-bold text-green-800 mb-4 flex items-center">
+                        🚀 Testing Automatizado
+                    </h3>
+                    <ul class="space-y-3 text-sm text-green-900">
+                        <li class="flex items-center">⚡ <strong>Instantáneo:</strong> Miles de tests en segundos.</li>
+                        <li class="flex items-center">🤖 <strong>Preciso:</strong> Siempre ejecuta los mismos pasos.</li>
+                        <li class="flex items-center">📈 <strong>Escalable:</strong> Escribes una vez, corres mil veces.</li>
+                        <li class="flex items-center">🛡️ <strong>Seguro:</strong> Permite refactorizar sin miedo.</li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- FOOTER: COSTO -->
+        <div class="text-center bg-red-100 p-4 rounded-xl border border-red-200 text-red-800 text-sm">
+            <span class="font-bold">⚠️ Recuerda el caso NASA (1999):</span> La falta de validación de unidades costó <strong>$327 millones de dólares</strong>. <br>El testing ahorra dinero.
+        </div>
+
+    </div>
+
+</body>
+</html>
