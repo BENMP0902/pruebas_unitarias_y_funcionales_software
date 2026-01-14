@@ -6,115 +6,94 @@ Repositorio académico enfocado en la implementación de estrategias de **Qualit
 
 ## 📋 Descripción del Proyecto
 
-Este repositorio aloja una colección progresiva de prácticas, ejercicios y módulos de código desarrollados durante el estudio de **Ingeniería de Software**. El objetivo principal es dominar los conceptos de **pruebas automatizadas** para construir software **robusto, escalable y mantenible**.
-
-El enfoque abarca desde los fundamentos teóricos y la configuración de entornos, hasta la implementación de **pruebas unitarias**, **pruebas de integración** y **pruebas End-to-End (E2E)** en aplicaciones reales utilizando **TypeScript** y **Node.js**.
-
----
-
-## 🛠️ Tecnologías y Herramientas
-
-El stack tecnológico utilizado en este repositorio incluye:
-
-- **Lenguaje:** TypeScript (Strict Mode)
-- **Runtime:** Node.js
-- **Framework de Testing:** Jest
-- **Testing de API:** Supertest
-- **Servidor Web:** Express.js
-- **Control de Versiones:** Git & GitHub
+Este repositorio aloja una colección progresiva de prácticas y módulos de código desarrollados durante el estudio de **Ingeniería de Software**.  
+El objetivo principal es dominar los conceptos de **pruebas automatizadas** para construir software **robusto, escalable y mantenible**.
 
 ---
 
 ## 📂 Estructura del Repositorio
 
-El proyecto está organizado en **módulos numerados secuencialmente**, representando el avance incremental del conocimiento:
+El proyecto está organizado en módulos que representan hitos de aprendizaje:
 
-### 📁 01-setup-entorno
-**Introducción y Fundamentos**
+### 1️⃣ Fundamentos
 
-- Configuración inicial del entorno de desarrollo.
-- Conceptos teóricos clave:
-  - Pirámide de Testing.
-  - Pruebas de regresión.
-  - Costo del error en etapas tardías.
-- Primeros pasos con TypeScript.
+**Ubicación:** `01-setup-entorno-BENMP0902/`
+
+- Introducción teórica a la calidad de software.
+- Pirámide de Testing y costos de regresión.
+- Configuración inicial del entorno **Node.js + TypeScript**.
 
 ---
 
-### 📁 02-entorno-jest-primer-test
-**Configuración de Jest y Primer Endpoint**
+### 2️⃣ API REST Evolutiva
 
-- Inicialización del proyecto con npm.
-- Configuración de `tsconfig.json`.
-- Implementación de arquitectura MVC básica (Rutas y Controladores).
-- Creación de API REST con Express (Endpoint `GET /tareas`).
-- Escritura de pruebas unitarias para validar:
-  - Contratos de API.
-  - Códigos de estado HTTP.
-- Manejo de asincronía en tests.
+**Ubicación:** `02-entorno-jest-primer-test-BENMP0902/`
 
----
+Proyecto principal que contiene una API REST completa con la siguiente arquitectura:
 
-## 🚀 Guía de Instalación y Ejecución
+```
+src/
+ ├── controllers/   # Controladores de endpoints
+ ├── services/      # Lógica de negocio desacoplada
+ ├── routes/        # Definición de endpoints (GET, POST)
 
-> **Nota:** Este repositorio funciona como un **monorepo modular**, donde cada directorio es un proyecto independiente.
-
-### Clonar el repositorio
-
-```bash
-git clone https://github.com/[TU_USUARIO]/prubeas_unitarias_y_funcionales_software.git
-cd prubeas_unitarias_y_funcionales_software
+tests/              # Pruebas unitarias con Jest y Supertest
+coverage/           # Reportes de cobertura de código
 ```
 
 ---
 
-### Ejecutar un módulo específico (Ejemplo: Módulo 02)
+## 📝 Notas e Infografías
 
-1. Navega al directorio del módulo:
+**Ubicación:** `notas/`
 
+Material de apoyo visual para el estudio:
+
+- Infografía Tema 1: Introducción
+- Infografía Tema 2: Arquitectura y Jest
+- Infografía Tema 3: Diseño y HTTP Codes
+- Infografía Tema 4: Cobertura y Refactor
+
+---
+
+## 🚀 Guía de Ejecución Rápida
+
+Para ejecutar el proyecto principal (**Módulo 02**):
+
+### Instalar dependencias
 ```bash
 cd 02-entorno-jest-primer-test-BENMP0902
-```
-
-2. Instala las dependencias:
-
-```bash
 npm install
 ```
 
----
-
-### Ejecutar las pruebas
-
-Para verificar el funcionamiento del código y ejecutar la suite de pruebas automatizadas:
-
+### Correr pruebas automatizadas
 ```bash
 npm test
 ```
 
----
+### Verificar cobertura de código
+```bash
+npm test -- --coverage
+```
 
-### Iniciar el servidor de desarrollo (si aplica)
-
+### Iniciar servidor de desarrollo
 ```bash
 npm start
 ```
 
 ---
 
-## 🧠 Metodología y Enfoque
+## 🛠️ Stack Tecnológico
 
-Este repositorio sigue principios de **ingeniería de software moderna**:
-
-- **Shift-Left Testing:** Integración de pruebas desde las etapas tempranas del desarrollo.
-- **Clean Code:** Arquitectura separada por responsabilidades (Routes / Controllers).
-- **Type Safety:** Uso estricto de TypeScript para prevenir errores en tiempo de compilación.
-- **Testing como contrato:** Las pruebas definen el comportamiento esperado del sistema.
+- **Runtime:** Node.js  
+- **Lenguaje:** TypeScript (Strict Mode)  
+- **Framework Web:** Express.js  
+- **Testing:** Jest + Supertest  
+- **Control de Versiones:** Git  
 
 ---
 
 ## 👤 Autor
 
-**Benjamin MP**  
+**Benjamín MP**  
 Estudiante de Ingeniería de Software
-Hybridge Education
